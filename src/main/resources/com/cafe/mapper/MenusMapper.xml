@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe.mapper.MenusMapper">
+
+    <!-- 해당 위치에 메뉴 블록 이미 있는지 조사 (select) -->
+    <select id="countMenusAtPosition" resultType="int">
+        SELECT COUNT(*)
+        FROM Menus
+        WHERE menu_category_id = #{menuCategoryId}
+        AND menu_page = #{menuPage}
+        AND menu_row = #{menuRow}
+        AND menu_column = #{menuColumn}
+    </select>
+
+    <!-- 이미 같은 이름의 메뉴가 있는지 조사 (select) -->
+    <select id="countSameMenuName" resultType="int">
+        SELECT COUNT(*)
+        FROM Menus
+        WHERE menu_name = #{menuName}
+    </select>
+
+    <!-- 메뉴 생성(insert) -->
+    <insert id="insertMenu" parameterType="com.cafe.domain.MenusVO">
+        INSERT INTO Menus (
+            menu_category_id,
+            menu_name,
+            menu_price,
+            menu_isFavorite,
+            menu_colorScheme,
+            menu_page,
+            menu_row,
+            menu_column
+        )
+        VALUES (
+            #{menu_category_id},
+            #{menu_name},
+            #{menu_price},
+            #{menu_isFavorite},
+            #{menu_colorScheme},
+            #{menu_page},
+            #{menu_row},
+            #{menu_column}
+        )
+    </insert>
+
+    <select id="selectAllMenus" resultType="com.cafe.domain.MenusVO">
+        SELECT * FROM Menus
+    </select>
+</mapper>
