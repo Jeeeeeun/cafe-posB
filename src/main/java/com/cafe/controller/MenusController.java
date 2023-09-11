@@ -46,4 +46,9 @@ public class MenusController {
             List<MenusVO> menuLists = menusService.getMenus();
             return ResponseEntity.status(HttpStatus.OK).body(menuLists);
     }
+
+    @PostMapping("/api/checkSameMenuName")
+    public boolean checkSameMenuName(@RequestBody MenusVO menusVO) {
+        return menusService.isSameMenuName(menusVO.getMenu_name());
+    }
 }
