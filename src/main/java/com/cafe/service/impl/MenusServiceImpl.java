@@ -69,7 +69,7 @@ public class MenusServiceImpl implements MenusService {
         try {
             return menusMapper.selectAllMenus();
         } catch (DataAccessException e) {
-            throw new DataAccessResourceFailureException("메뉴 목록을 불러오던 중 오류가 발생했습니다.", e);
+            throw new DataAccessResourceFailureException("메뉴 목록을 불러오던 중 오류가 발생했습니다. - ", e);
         } catch (Exception e) {
             throw new RuntimeException("예상치 못한 오류가 발생했습니다.", e);
         }

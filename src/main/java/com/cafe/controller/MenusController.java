@@ -6,12 +6,10 @@ import com.cafe.service.impl.MenusServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.datatype.DatatypeConfigurationException;
 import java.util.List;
 
 @RestController // @Controller + @ResponseBody

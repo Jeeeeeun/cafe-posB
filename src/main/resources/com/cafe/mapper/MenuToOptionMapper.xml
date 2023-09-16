@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe.mapper.MenuToOptionMapper">
+    <resultMap id="menuToOptionResultMap" type="com.cafe.domain.MenuToOptionVO">
+        <association property="menu" javaType="com.cafe.domain.MenusVO">
+            <id column="menu_id" property="menu_id"/>
+            <result column="menu_category_id" property="menu_category_id"/>
+            <result column="menu_name" property="menu_name"/>
+            <result column="menu_price" property="menu_price"/>
+            <result column="menu_isFavorite" property="menu_isFavorite" javaType="Character"/>
+            <result column="menu_colorScheme" property="menu_colorScheme"/>
+            <result column="menu_page" property="menu_page"/>
+            <result column="menu_row" property="menu_row"/>
+            <result column="menu_column" property="menu_column"/>
+        </association>
+        <collection property="options" ofType="com.cafe.domain.OptionsVO">
+            <id column="option_id" property="option_id"/>
+            <result column="option_category_id" property="option_category_id"/>
+            <result column="option_name" property="option_name"/>
+            <result column="option_is_free" property="option_is_free" javaType="Character"/>
+            <result column="option_price" property="option_price"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectAllMenuWithOptions" resultMap="menuToOptionResultMap">
+        SELECT
+        m.menu_id,
+        m.menu_name,
+        m.menu_price,
+        o.option_category_id,
+        o.option_name,
+        o.option_price
+        FROM
+        Menus m
+        JOIN
+        MenuToOption mo ON m.menu_id = mo.menu_id
+        JOIN
+        Options o ON o.option_id = mo.option_id
+    </select>
+</mapper>
